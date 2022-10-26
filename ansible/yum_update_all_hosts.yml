@@ -1,5 +1,6 @@
 - hosts: all
   become: yes
+  remote-user: ec2-user
   tasks:
   - name: Update all installed packages using YUM module
     yum:
