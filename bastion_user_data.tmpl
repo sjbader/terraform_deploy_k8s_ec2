@@ -1,0 +1,31 @@
+#!/bin/sh
+# The location of the user_data file to create
+file='/provisioning_info.txt'
+
+# Assign variables and put into file
+pod="${pod}"
+master_hostnames="${master_hostname}"
+master_ips="${master_ip}"
+worker_hostnames="${worker_hostname}"
+worker_ips="${worker_ip}"
+echo "[DEFAULT]" >> $file
+echo "lab=$pod" >> $file
+echo "master_hostnames=$master_hostnames" >> $file
+echo "master_ips=$master_ips" >> $file
+echo "worker_hostnames=$worker_hostnames" >> $file
+echo "worker_ips=$worker_ips" >> $file
+
+# SSH Key for connecting to other hosts
+echo "${ssh_key}" >> /home/ec2-user/ssh_key.pem
+chmod 600 /home/ec2-user/ssh_key.pem
+chown ec2-user:ec2-user /home/ec2-user/ssh_key.pem 
+
+# Get our scripts
+mkdir /home/ec2-user/scripts
+cd /home/ec2-user/scripts/
+/usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/scripts/generate_ansible_inventory_file.py
+/usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/scripts/generate_hosts_file.py
+
+# Run our scripts
+/usr/bin/python3 /home/ec2-user/scripts/generate_ansible_inventory_file.py
+/usr/bin/python3 /home/ec2-user/scripts/generate_hosts_file.py

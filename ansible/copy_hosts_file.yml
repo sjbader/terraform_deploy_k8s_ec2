@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Copy hosts file to servers
+      copy:
+        src: /home/ec2-user/scripts/output/hosts.txt
+        dest: /etc/hosts
