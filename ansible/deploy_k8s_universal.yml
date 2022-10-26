@@ -1,0 +1,15 @@
+---
+- hosts: masters, workers
+  become: yes
+  remote_user: ec2-user
+  tasks:
+    - name: Add k8s yum repository
+      blockinfile:
+        path: /etc/yum.repods.d/kubernetes.repo
+        create: yes
+        block: |
+              [kubernetes]
+              baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+              enabled=1
+              gpgcheck=1
+              gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
