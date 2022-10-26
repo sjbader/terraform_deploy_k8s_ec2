@@ -13,3 +13,51 @@
               enabled=1
               gpgcheck=1
               gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+    - name: Install containerd
+      yum: 
+        name: 'containerd'
+        state: latest
+        update_cache: yes
+        update_only: yes
+      register: containerd_update_status
+
+    - name: Enable IPv4 Forwarding and enable iptables to see bridged traffic
+      blockinfile:
+        path: /etc/modules-load.d/k8s.conf
+        create: yes
+        block: |
+              net.bridge.bridge-nf-call-iptables  = 1
+              net.bridge.bridge-nf-call-ip6tables = 1
+              net.ipv4.ip_forward                 = 1
+
+    - name: Start modprobe overlay and br_netfilter
+      shell: |
+              modprobe overlay
+              modprobe br_netfilter
+    
+    - name: Apply sysctl parameters w/o reboot
+      shell: |
+              sysctl --system
+
+    - name: Set SELinux in permissive mode
+      shell: |
+              setenforce 0
+
+    - name: Disable swap
+      shell: |
+            swapoff -a
+            sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+    
+    - name: Install kubetlet, kubeadm, kubectl
+      shell: |
+            yum install kubelet kubeadm kubectl --disableexcludes=kubernetes -y
+
+    - name: Enable kubelet via systemctl
+      shell: |
+            systemctl enable --now kubelete
+
+    - name: Start containerd
+      systemd:
+        state: started
+        name: containerd
