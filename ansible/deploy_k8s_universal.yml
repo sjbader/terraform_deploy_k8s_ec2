@@ -5,7 +5,7 @@
   tasks:
     - name: Add k8s yum repository
       blockinfile:
-        path: /etc/yum.repods.d/kubernetes.repo
+        path: /etc/yum.repos.d/kubernetes.repo
         create: yes
         block: |
               [kubernetes]
