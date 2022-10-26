@@ -1,4 +1,5 @@
 - hosts: all
+  become: yes
   tasks:
   - name: Update all installed packages using YUM module
     yum:
@@ -7,4 +8,3 @@
       update_cache: yes
       update_only: yes
     register: yum_update_status
-    become: true

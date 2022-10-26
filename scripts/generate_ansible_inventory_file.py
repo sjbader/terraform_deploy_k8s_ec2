@@ -30,7 +30,8 @@ hosts.write(f"[masters]\n")
 
 i = 0
 while(i < len(master_hostnames)):
-    hosts.write(f"{master_hostnames[i]}\n")
+    hosts.write(f"pod{lab}-master{i+1}\n")
+    #hosts.write(f"{master_hostnames[i]}\n")
     i += 1
 
 # Put 1 new line between the sections (masters & workers)
@@ -41,7 +42,8 @@ hosts.write(f"[workers]\n")
 
 i = 0
 while(i < len(worker_hostnames)):
-    hosts.write(f"{worker_hostnames[i]}\n")
+    hosts.write(f"pod{lab}-worker{i+1}\n")
+    #hosts.write(f"{worker_hostnames[i]}\n")
     i += 1
 
 # Create localhost entry for bastion host

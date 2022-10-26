@@ -15,6 +15,9 @@ echo "master_ips=$master_ips" >> $file
 echo "worker_hostnames=$worker_hostnames" >> $file
 echo "worker_ips=$worker_ips" >> $file
 
+# Set our hostname
+hostnamectl set-hostname pod{$pod}-bastion
+
 # SSH Key for connecting to other hosts
 echo "${ssh_key}" >> /home/ec2-user/ssh_key.pem
 chmod 600 /home/ec2-user/ssh_key.pem
@@ -29,3 +32,10 @@ cd /home/ec2-user/scripts/
 # Run our scripts
 /usr/bin/python3 /home/ec2-user/scripts/generate_ansible_inventory_file.py
 /usr/bin/python3 /home/ec2-user/scripts/generate_hosts_file.py
+
+# Install Ansible
+amazon-linux-extras enable ansible2
+yum clean metadata
+yum install ansible -yum
+
+
