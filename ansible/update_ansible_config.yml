@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars:
+    ansible_connection: local
+  become: yes
+  tasks:
+    - name: Disable host key checking in Ansible
+      ansible.builtin.lineinfile:
+        path: /etc/ansible/ansible.cfg
+        regexp: '^#host_key_checking = False$'
+        line: 'host_key_checking = False'
