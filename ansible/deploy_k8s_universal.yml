@@ -40,10 +40,6 @@
       shell: |
               sysctl --system
 
-    - name: Set SELinux in permissive mode
-      shell: |
-              setenforce 0
-
     - name: Disable swap
       shell: |
             swapoff -a
@@ -55,7 +51,7 @@
 
     - name: Enable kubelet via systemctl
       shell: |
-            systemctl enable --now kubelete
+            systemctl enable --now kubelet
 
     - name: Start containerd
       systemd:
