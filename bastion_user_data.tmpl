@@ -29,4 +29,7 @@ echo "worker_ips=$worker_ips" >> $file
 /usr/bin/cd /home/ec2-user/scripts/
 /usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/scripts/configure_system.sh
 
+# Run initial script
+/bin/sh /home/ec2-user/scripts/configure_system.sh
+
 
