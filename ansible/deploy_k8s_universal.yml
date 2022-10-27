@@ -19,7 +19,6 @@
         name: 'containerd'
         state: latest
         update_cache: yes
-        update_only: yes
 
     - name: Enable IPv4 Forwarding and enable iptables to see bridged traffic
       blockinfile:
@@ -49,7 +48,6 @@
         name: 'kubelet'
         state: latest
         update_cache: yes
-        update_only: yes
 
     - name: Enable kubelet via systemctl
       shell: |
