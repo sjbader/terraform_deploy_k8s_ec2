@@ -8,10 +8,14 @@
       name: kubeadm
       state: latest
       update_cache: yes
-  
+
+   - name: Pausing for 15 seconds to wait for master to deploy pod network
+    pause:
+      seconds: 15
+
   - name: Copying join command to file worker node
     copy:
-      src: "/home/ec2-user/k8s_join_command"
+      src: "/home/ec2-user/k8s_join_command.sh"
       dest: "/home/ec2-user/k8s_join_command.sh" 
 
   - name: Running join command on worker node

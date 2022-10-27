@@ -30,7 +30,7 @@ cd /home/ec2-user/ansible/
 /usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/ansible/yum_update_all_hosts.yml
 /usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/ansible/deploy_k8s_universal.yml
 /usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/ansible/deploy_k8s_masters.yml
-
+/usr/bin/wget -q https://raw.githubusercontent.com/sjbader/terraform_deploy_k8s_ec2/master/ansible/deploy_k8s_workers.yml
 
 # Run the Ansible playbooks
 /usr/bin/ansible-playbook -i /home/ec2-user/scripts/output/ansible_hosts.txt /home/ec2-user/ansible/update_ansible_config.yml
@@ -38,3 +38,4 @@ cd /home/ec2-user/ansible/
 /usr/bin/ansible-playbook --private-key /home/ec2-user/keys/ssh_key.pem -i /home/ec2-user/scripts/output/ansible_hosts.txt /home/ec2-user/ansible/yum_update_all_hosts.yml
 /usr/bin/ansible-playbook --private-key /home/ec2-user/keys/ssh_key.pem -i /home/ec2-user/scripts/output/ansible_hosts.txt /home/ec2-user/ansible/deploy_k8s_universal.yml
 /usr/bin/ansible-playbook --private-key /home/ec2-user/keys/ssh_key.pem -i /home/ec2-user/scripts/output/ansible_hosts.txt /home/ec2-user/ansible/deploy_k8s_masters.yml
+/usr/bin/ansible-playbook --private-key /home/ec2-user/keys/ssh_key.pem -i /home/ec2-user/scripts/output/ansible_hosts.txt /home/ec2-user/ansible/deploy_k8s_workers.yml
