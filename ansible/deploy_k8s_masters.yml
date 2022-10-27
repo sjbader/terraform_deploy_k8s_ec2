@@ -34,9 +34,9 @@
       owner: ec2-user
       group: ec2-user
 
-  - name: Pausing for 10 seconds before deploying pod network
+  - name: Pausing for 15 seconds before deploying pod network
     pause:
-      seconds: 10
+      seconds: 15
 
   - name: Installing calico pod network
     become: yes
@@ -45,4 +45,15 @@
           kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/tigera-operator.yaml
           kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/custom-resources.yaml
     
-    
+  - name: Getting token and join command for worker nodes
+    become: yes
+    become_user: ec2-user
+    shell: kubeadm token create --print-join-command
+    register: k8s_worker_join_command
+
+  - name: Copying join command to file
+    delegate_to: localhost
+    copy:
+      content: "{{k8s_worker_join_command.stdout_lines[0]}}"
+      dest: "/home/ec2-user/k8s_join_command.sh" 
+
