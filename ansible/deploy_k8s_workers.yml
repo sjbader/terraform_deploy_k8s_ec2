@@ -9,7 +9,7 @@
       state: latest
       update_cache: yes
 
-   - name: Pausing for 15 seconds to wait for master to deploy pod network
+  - name: Pausing for 15 seconds to wait for master to deploy pod network
     pause:
       seconds: 15
 
