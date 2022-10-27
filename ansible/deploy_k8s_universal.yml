@@ -32,8 +32,8 @@
 
     - name: Start modprobe overlay and br_netfilter
       shell: |
-              modprobe overlay
-              modprobe br_netfilter
+            modprobe overlay
+            modprobe br_netfilter
     
     - name: Apply sysctl parameters w/o reboot
       shell: |
@@ -45,7 +45,7 @@
             sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
     
     - name: yum - Install kubelet
-      yum: |
+      yum:
         name: 'kubelet'
         state: latest
         update_cache: yes
