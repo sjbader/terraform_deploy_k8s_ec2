@@ -29,7 +29,7 @@
   - name: Copying admin.conf to ec2-user directory
     copy:
       src: /etc/kubernetes/admin.conf
-      dst: /home/ec2-user/.kube/config
+      dest: /home/ec2-user/.kube/config
       owner: ec2-user
       group: ec2-user
 
