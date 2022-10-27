@@ -45,14 +45,14 @@ hosts.write("::1                  localhost6 localhost6.localdomain6\n")
 i = 0
 while(i < len(master_ips)):
     ip_addr = master_ips[i].ljust(20)
-    hosts.write(f"{ip_addr} {master_hostnames[i]} pod{lab}-master{i+1}\n")
+    hosts.write(f"{ip_addr} {master_hostnames[i]} pod{lab}-master{i+1} pod{lab}-master{i+1}.local\n")
     i += 1
 
 # Create our hosts file entries for worker nodes
 i = 0
 while(i < len(worker_ips)):
     ip_addr = worker_ips[i].ljust(20)
-    hosts.write(f"{ip_addr} {worker_hostnames[i]} pod{lab}-worker{i+1}\n")
+    hosts.write(f"{ip_addr} {worker_hostnames[i]} pod{lab}-worker{i+1} pod{lab}-worker{i+1}.local\n")
     i += 1
 
 # Close file
