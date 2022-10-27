@@ -34,6 +34,10 @@
       owner: ec2-user
       group: ec2-user
 
+  - name: Pausing for 10 seconds before deploying pod network
+    pause:
+      seconds: 10
+
   - name: Installing calico pod network
     become: yes
     become_user: ec2-user

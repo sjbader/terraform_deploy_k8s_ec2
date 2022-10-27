@@ -9,3 +9,9 @@
         path: /etc/ansible/ansible.cfg
         regexp: '^#host_key_checking = False$'
         line: 'host_key_checking = False'
+
+    - name: Enabling logging in Ansible
+      ansible.builtin.lineinfile:
+        path: /etc/ansible/ansible.cfg
+        regexp: '^#log_path = /var/log/ansible.log$'
+        line: 'log_path = /var/log/ansible.log'
