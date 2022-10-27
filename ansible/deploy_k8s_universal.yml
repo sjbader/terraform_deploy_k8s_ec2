@@ -14,13 +14,12 @@
               gpgcheck=1
               gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
-    - name: Install containerd
+    - name: yum - Install containerd
       yum: 
         name: 'containerd'
         state: latest
         update_cache: yes
         update_only: yes
-      register: containerd_update_status
 
     - name: Enable IPv4 Forwarding and enable iptables to see bridged traffic
       blockinfile:
@@ -45,9 +44,12 @@
             swapoff -a
             sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
     
-    - name: Install kubetlet, kubeadm, kubectl
-      shell: |
-            yum install kubelet kubeadm kubectl --disableexcludes=kubernetes -y
+    - name: yum - Install kubelet
+      yum: |
+        name: 'kubelet'
+        state: latest
+        update_cache: yes
+        update_only: yes
 
     - name: Enable kubelet via systemctl
       shell: |
