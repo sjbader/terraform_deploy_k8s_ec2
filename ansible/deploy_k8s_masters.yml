@@ -1,0 +1,45 @@
+---
+- hosts: masters
+  become: yes
+  remote_user: ec2-user
+  tasks:
+    name: yum - Install kubeadm
+    yum:
+      name: kubeadm
+      state: latest
+      update_cache: yes
+  
+    name: yum - Install kubectl
+      yum:
+        name: kubectl
+        state: latest
+        update_cache: yes
+  
+    name: k8s - Initialize cluster
+    shell: kubeadm init --pod-network-cidr=192.168.0.0/16
+    args:
+      creates: cluster.txt
+
+    name: Creating .kube directory for ec2-user
+    file:
+      path: /home/ec2-user/.kube
+      state: directory
+      mode: 0755
+      owner: ec2-user
+      group: ec2-user
+
+    name: Copying admin.conf to ec2-user directory
+    copy:
+      src: /etc/kubernetes/admin.conf
+      dst: /home/ec2-user/.kube/config
+      owner: ec2-user
+      group: ec2-user
+
+    name: Installing calico pod network
+    become: yes
+    become_user: ec2-user
+    shell: |
+          kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/tigera-operator.yaml
+          kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/custom-resources.yaml
+    
+    
