@@ -1,0 +1,18 @@
+---
+- hosts: workers
+  become: yes
+  remote_user: ec2-user
+  tasks:
+  - name: yum - Install kubeadm
+    yum:
+      name: kubeadm
+      state: latest
+      update_cache: yes
+  
+  - name: Copying join command to file worker node
+    copy:
+      src: "/home/ec2-user/k8s_join_command"
+      dest: "/home/ec2-user/k8s_join_command.sh" 
+
+  - name: Running join command on worker node
+    shell: sh /home/ec2-user/k8s_join_command.sh
