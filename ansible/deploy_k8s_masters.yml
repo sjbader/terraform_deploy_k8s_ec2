@@ -17,8 +17,6 @@
   
   - name: k8s - Initialize cluster
     shell: kubeadm init --pod-network-cidr=192.168.0.0/16
-      args:
-        creates: cluster.txt
 
   - name: Creating .kube directory for ec2-user
     file:
