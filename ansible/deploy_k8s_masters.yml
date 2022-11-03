@@ -5,13 +5,13 @@
   tasks:
   - name: yum - Install kubeadm
     yum:
-      name: kubeadm
+      name: kubeadm-1.24.7
       state: latest
       update_cache: yes
   
   - name: yum - Install kubectl
     yum:
-      name: kubectl
+      name: kubectl-1.24.7
       state: latest
       update_cache: yes
   

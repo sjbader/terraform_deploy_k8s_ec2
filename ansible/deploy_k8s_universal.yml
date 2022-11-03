@@ -53,7 +53,7 @@
     
     - name: yum - Install kubelet
       yum:
-        name: 'kubelet'
+        name: kubelet-1.24.7
         state: latest
         update_cache: yes
 
