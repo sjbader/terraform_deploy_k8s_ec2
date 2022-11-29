@@ -1,55 +1,55 @@
 variable "aws_region" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "lab_number" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "bastion_ami_id" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "bastion_instance_type" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "bastion_key_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "master_ami_id" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "master_instance_type" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "master_key_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "worker_ami_id" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "worker_instance_type" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "worker_key_name" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -74,6 +74,6 @@ variable "bastion_ingress_cidr" {
 }
 
 variable "ssh_key" {
-  type = string
+  type    = string
   default = ""
 }
